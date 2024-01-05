@@ -3,7 +3,7 @@ import csv
 
 #vars
 output_file_name = "eyes_fanfiction_recs.csv"
-input_file_name = "small_set_urls.txt"
+input_file_name = "raw_urls.txt"
 
 #code
 with open(output_file_name, 'a', encoding="utf-8", newline='',) as output_file:
