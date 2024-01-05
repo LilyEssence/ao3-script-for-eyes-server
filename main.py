@@ -1,23 +1,23 @@
 import AO3
 import csv
 
-with open("origin_fanfiction_recs.csv", 'a', encoding="utf-8", newline='',) as output:
-    with open("raw_urls.txt", "r") as urls:
-        for url in urls:
+#vars
+output_file_name = "eyes_fanfiction_recs.csv"
+input_file_name = "small_set_urls.txt"
+
+#code
+with open(output_file_name, 'a', encoding="utf-8", newline='',) as output_file:
+    with open(input_file_name, "r") as urls_file:
+        for url in urls_file:
             url = url.strip()
-            # print(url)
             is_work = url.find('https://archiveofourown.org/works/') >= 0
             if is_work:
                 # pass
                 try:
                     workid = AO3.utils.workid_from_url(url)
-                    print(workid)
                     work = AO3.Work(workid)
                     if work:
-                        print(f"{work.title=}")
-                        print(f"{work.relationships=}")
-
-                        csvwriter = csv.writer(output)
+                        csvwriter = csv.writer(output_file)
                         csvwriter.writerow([url, work.title, work.relationships, work.rating, work.tags, work.status])
                 except Exception as e:
                     print(e)                    
